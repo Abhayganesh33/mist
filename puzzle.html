@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Tree Planting</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    /* Add background image */
+    background-image: url('https://i.postimg.cc/WpBqfGPB/pikaso-texttoimage-forest.jpg');
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 550px;
+    /* Center the container horizontally */
+    margin: 90px auto;
+    padding: 30px; /* Reduced padding */
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(8, 207, 48, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #170bff; /* Change heading color */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="submit"],
+  button {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    /* Change button background color */
+    background-color: #dae815;
+    color: rgb(1, 1, 1);
+    cursor: pointer;
+    width: 100%;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="submit"] {
+    /* Width already set to 100% */
+  }
+
+  #tree {
+    width: 100px;
+    height: 100px;
+    background: url('tree.png') no-repeat center center;
+    background-size: contain;
+    display: none;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  #done {
+    text-align: center;
+    font-size: 32px; /* Larger font size */
+    margin-top: 20px;
+    color: #fff;
+  }
+
+  #loading-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  #loading-progress {
+    width: 0;
+    height: 100%;
+    background-color: #4caf50;
+    animation: loading 4s linear forwards;
+  }
+
+  @keyframes loading {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Virtual Tree Planting</h1>
+ <div id="register-form">
+<h2 style="color: yellow; padding: 5px 10px;">Register</h2> <!-- Reduced padding -->
+<form id="register-form" onsubmit="registerUser(event)">
+  <input type="text" id="new-username" placeholder="New Username" required>
+  <input type="password" id="new-password" placeholder="New Password" required>
+  <input type="submit" value="Register">
+</form>
+</div>
+
+  <div id="plant-options" style="display: none;">
+    <h2>Plant a Tree</h2>
+    <button onclick="showTreePlantingForm()">Plant a Tree for Free</button>
+    <button onclick="buyAndPlantTree()">Buy a Tree and Plant</button>
+  </div>
+  <div id="tree"></div>
+  <div id="loading-bar" style="display: none;">
+    <div id="loading-progress"></div>
+  </div>
+  <div id="done"></div>
+</div>
+
+<script>
+  let loggedIn = false;
+
+  function registerUser(event) {
+    event.preventDefault(); // Prevent form submission
+    // Implement user registration logic here
+    // For demonstration purposes, assuming registration is successful
+    loggedIn = true;
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('plant-options').style.display = 'block';
+  }
+
+  function showTreePlantingForm() {
+    if (loggedIn) {
+      const treeForm = `
+        <h2>Tree Planting Details</h2>
+        <form id="tree-planting-form" onsubmit="plantFreeTree(event)">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="text" id="phone" placeholder="Your Phone Number" required>
+          <input type="text" id="country" placeholder="Country" required>
+          <input type="submit" value="Plant Tree">
+        </form>
+      `;
+      document.getElementById('plant-options').innerHTML = treeForm;
+    } else {
+      alert('Please register to plant a tree.');
+    }
+  }
+
+  function plantFreeTree(event) {
+    event.preventDefault(); // Prevent form submission
+    document.getElementById('plant-options').style.display = 'none'; // Hide plant options
+    document.getElementById('loading-bar').style.display = 'block'; // Show loading bar
+    setTimeout(function() {
+      document.getElementById('tree').style.display = 'block'; // Show tree
+      document.getElementById('tree').style.animation = 'growTree 2s forwards';
+      document.getElementById('done').innerText = 'Done!'; // Show "Done!" message
+      setTimeout(function() {
+        window.location.reload(); // Refresh the page after 4 seconds
+      }, 4000);
+    }, 4000);
+  }
+
+  function buyAndPlantTree() {
+    if (loggedIn) {
+      // Implement buy and plant tree logic here
+      alert('Feature to buy and plant tree is not implemented in this example.');
+    } else {
+      alert('Please register to buy and plant a tree.');
+    }
+  }
+</script>
+</body>
+</html>

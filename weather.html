@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIST</title>
+    <style>
+        body {
+            /* Set background color */
+            background-color: #ADD8E6;
+            color: white; /* Set text color */
+            font-family: Arial, sans-serif; /* Set font */
+            background-image: url('https://i.postimg.cc/rmN2Vpxq/fotor-ai-2024041803021.jpg'); /* Set background image */
+            background-size: cover; /* Cover the entire background */
+            background-repeat: no-repeat; /* Don't repeat the background image */
+            background-position: center top; /* Position the background image at the center and top of the page */
+            padding-top: 50px; /* Add padding top to create space for the logo */
+            position: relative; /* Make body position relative for absolute positioning of the logo */
+            transition: background-color 0.5s ease; /* Smooth transition for background color */
+        }
+        .logo {
+            position: absolute; /* Position the logo absolutely */
+            top: 10px; /* Adjust top position */
+            left: 10px; /* Adjust left position */
+            width: 100px; /* Adjust width */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .buttons-container {
+            position: absolute; /* Position the buttons container absolutely */
+            top: 25px; /* Adjust top position */
+            left: 120px; /* Adjust left position */
+        }
+        .button {
+            background-color: transparent; /* Transparent background */
+            border: 0px solid white; /* White border */
+            color: white; /* White text color */
+            padding: 20px 20px; /* Padding */
+            margin-left: 40px; /* Increased margin between buttons */
+            text-decoration: none; /* Remove underline */
+            font-size: 13px; /* Font size */
+        }
+        /* Theme switcher styles */
+        .switch {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: inline-block;
+            width: 40px; /* Adjust width */
+            height: 20px; /* Adjust height */
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 20px; /* Adjust border-radius */
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; /* Adjust height */
+            width: 16px; /* Adjust width */
+            left: 2px; /* Adjust left position */
+            bottom: 2px; /* Adjust bottom position */
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px); /* Adjust translateX value */
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background-color: #222; /* Darker background color */
+        }
+
+        .dark-mode .slider {
+            background-color: #777;
+        }
+
+        .dark-mode input:checked + .slider {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <img src="https://i.postimg.cc/02RMbWTj/MIST.png" alt="Company Logo" class="logo">
+    <!-- Buttons Container -->
+    <div class="buttons-container">
+        <a href="#" class="button">Weather Update</a>
+        <a href="#" class="button">Weather Solutions</a>
+        <a href="#" class="button">Weather Blog</a>
+        <a href="#" class="button">Company</a>
+        <a href="#" class="button">Technology</a> <!-- Added Technology button -->
+    </div>
+
+    <!-- Theme switcher -->
+    <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+    </label>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                themeToggle.checked = true;
+            }
+        }
+
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', '');
+            }
+        });
+    </script>
+</body>
+</html>
