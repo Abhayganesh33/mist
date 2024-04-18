@@ -1,7 +1,7 @@
-# Things with Feathers
+# Mist
 Long Description about project. This project do that. This project is awesome...
 
-## Team members
+## Things with feathers
 - Name 1
 - Name 2
 ## Link to product walkthrough
